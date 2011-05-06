@@ -29,14 +29,16 @@
 			el = $(el);
 			ratio = el.height() / el.width();
 
-			var win_h = win.height(), win_w = win.width();
-			// TODO: Update with binding to a parent element
-			if(defaults.parentElement != $('body')) {
-				win_h = defaults.parentElement.height(), win_w = defaults.parentElement.width();
-			}
+			var win_h = defaults.parentElement.height();
+                        var win_w = defaults.parentElement.width();
 
 			var settings = $.extend({},opts.settings);
-			
+
+                        if(settings.parentElement.selector != $('body').selector ) {
+                            // is this case, parent must have position relative and overflow hidden
+                            settings.parentElement.css("position","relative");
+                            settings.parentElement.css("overflow","hidden");
+                        }
 			switch(settings.cropType) {
 				case 'fit':
 					h = win_h;
@@ -99,7 +101,7 @@
 					l = (win_w - w)/2;
 					break;
 			}
-			el.css({'height':h, 'width':w, 'position': 'absolute', 'top': t, 'left': l});					
+			el.css({'height':h, 'width':w, 'position': 'absolute', 'top': t, 'left': l});
 		};
 
         var followBrowserResize = function(el) {
@@ -109,7 +111,7 @@
 			resizeNode(el);
         };
 
-	    return this.each(function() { 
+	    return this.each(function() {
 			// Check that it is an image
 			if (this.nodeName === 'IMG') {
 				// Undertake check load state
