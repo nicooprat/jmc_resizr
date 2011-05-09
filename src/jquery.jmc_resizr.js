@@ -21,18 +21,14 @@
 			parentElement : $('body')
         };
 
-		var opts = {
-			settings: $.extend({}, defaults, settings)
-		};
+		settings = $.extend({}, defaults, settings);
 
 		var resizeNode = function(el) {
 			el = $(el);
 			ratio = el.height() / el.width();
 
-			var win_h = defaults.parentElement.height();
-                        var win_w = defaults.parentElement.width();
-
-			var settings = $.extend({},opts.settings);
+                        var win_h = settings.parentElement.height();
+                        var win_w = settings.parentElement.width();
 
                         if(settings.parentElement.selector != $('body').selector ) {
                             // is this case, parent must have position relative and overflow hidden
@@ -117,7 +113,6 @@
 				// Undertake check load state
 				$(this).load(function () {
 					resizeNode(this);
-					var settings = $.extend({},opts.settings);
 			        if (settings.followBrowserSize) {
 						el = this;
 			            $(window).bind('resize', function() {
@@ -130,7 +125,6 @@
 		        }).attr('src', $(this).attr('src'));
 	        } else {
 				resizeNode(this);
-				var settings = $.extend({},opts.settings);
 		        if (settings.followBrowserSize) {
 					el = this;
 		            $(window).bind('resize', function() {
