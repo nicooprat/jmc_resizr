@@ -6,7 +6,7 @@
  * Licensed under the MIT License: http://www.opensource.org/licenses/mit-license.php
  * Requires: jQuery v1.3.2 or later
 */
-(function($) {
+$(document).ready(function() {
     $.fn.jmc_resizr = function(settings) {
 
 		var win = $(window);
@@ -134,4 +134,4 @@
 			}
 	    });
 	};
-})(jQuery);
+});
